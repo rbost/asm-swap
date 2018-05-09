@@ -12,11 +12,11 @@ int main(int argc, char** argv)
 
 TEST(Swap, eq_noinline)
 {
-    __m128 a0 = _mm_set1_epi8(1);
-    __m128 b0 = _mm_set1_epi8(2);
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
 
-    __m128 a1 = a0, a2 = a0;
-    __m128 b1 = b0, b2 = b0;
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
 
     swap_eq_noinline(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1));
@@ -29,11 +29,11 @@ TEST(Swap, eq_noinline)
 
 TEST(Swap, plus_noinline)
 {
-    __m128 a0 = _mm_set1_epi8(1);
-    __m128 b0 = _mm_set1_epi8(2);
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
 
-    __m128 a1 = a0, a2 = a0;
-    __m128 b1 = b0, b2 = b0;
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
 
     swap_plus_noinline(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1));
@@ -46,11 +46,11 @@ TEST(Swap, plus_noinline)
 
 TEST(Swap, eq_inline)
 {
-    __m128 a0 = _mm_set1_epi8(1);
-    __m128 b0 = _mm_set1_epi8(2);
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
 
-    __m128 a1 = a0, a2 = a0;
-    __m128 b1 = b0, b2 = b0;
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
 
     swap_eq_inline(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1));
@@ -62,11 +62,11 @@ TEST(Swap, eq_inline)
 }
 TEST(Swap, plus_inline)
 {
-    __m128 a0 = _mm_set1_epi8(1);
-    __m128 b0 = _mm_set1_epi8(2);
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
 
-    __m128 a1 = a0, a2 = a0;
-    __m128 b1 = b0, b2 = b0;
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
 
     swap_plus_inline(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1));

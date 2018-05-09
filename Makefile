@@ -1,11 +1,11 @@
-CPPFLAGS ?= -I.
+CPPFLAGS ?= -I. -mavx -pthread
 CXXFLAGS ?= -std=c++11
 BUILD_DIR ?= ./build
 SRC_DIR ?= ./src
 LDFLAGS ?= -lpthread
 
 test: $(BUILD_DIR)/main.o $(BUILD_DIR)/gtest.o $(BUILD_DIR)/swap.o
-	$(CXX) $(LDFLAGS) $^ -o $@
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/main.o: $(SRC_DIR)/main.cpp $(SRC_DIR)/swap.h
 	$(MKDIR_P) $(dir $@)

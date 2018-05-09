@@ -1,4 +1,4 @@
-CPPFLAGS ?= -I. -mavx -pthread
+CPPFLAGS ?= -I. -mavx -O3 -pthread
 CXXFLAGS ?= -std=c++11
 BUILD_DIR ?= ./build
 SRC_DIR ?= ./src

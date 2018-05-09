@@ -9,6 +9,41 @@ int main(int argc, char** argv)
     return RUN_ALL_TESTS();
 }
 
+TEST(Swap, 64_bits_ok)
+{
+    uint64_t a0 = 1;
+    uint64_t b0 = 2;
+
+    uint64_t a1 = a0, a2 = a0;
+    uint64_t b1 = b0, b2 = b0;
+
+    swap_64_ok(0, &a1, &b1);
+    EXPECT_EQ(a0, a1);
+    EXPECT_EQ(b0, b1);
+
+
+    swap_64_ok(1, &a2, &b2);
+    EXPECT_EQ(a0, b2);
+    EXPECT_EQ(b0, a2);
+}
+
+TEST(Swap, 64_bits_ko)
+{
+    uint64_t a0 = 1;
+    uint64_t b0 = 2;
+
+    uint64_t a1 = a0, a2 = a0;
+    uint64_t b1 = b0, b2 = b0;
+
+    swap_64_ko(0, &a1, &b1);
+    EXPECT_EQ(a0, a1);
+    EXPECT_EQ(b0, b1);
+
+
+    swap_64_ko(1, &a2, &b2);
+    EXPECT_EQ(a0, b2);
+    EXPECT_EQ(b0, a2);
+}
 
 TEST(Swap, eq_noinline)
 {

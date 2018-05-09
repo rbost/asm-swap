@@ -20,7 +20,42 @@ extern "C" {
 // *a = va;
 // *b = vb;
     
+__attribute__((always_inline))
+inline void swap_64_ok(uint8_t cond, uint64_t* a, uint64_t* b)
+{
+    uint64_t va, vb, vc;
+    va = *a;
+    vb = *b;
+    vc = va;
+    asm volatile("testb %3, %3\n\t"
+                 "cmovneq %1, %0\n\t"
+                 "cmovneq %2, %1\n\t"
+                 : "+r"(va), "+r"(vb), "+r"(vc) /* output */
+                 : "r"(cond) /* input */
+                 :                    /* clobbered register */
+    );
+    *a = va;
+    *b = vb;
+}
 
+__attribute__((always_inline))
+inline void swap_64_ko(uint8_t cond, uint64_t* a, uint64_t* b)
+{
+    uint64_t va, vb, vc;
+    va = *a;
+    vb = *b;
+    vc = va;
+    asm volatile("testb %3, %3\n\t"
+                 "cmovneq %1, %0\n\t"
+                 "cmovneq %2, %1\n\t"
+                 : "+r"(va), "+r"(vb) /* output */
+                 : "r"(vc), "r"(cond) /* input */
+                 :                    /* clobbered register */
+    );
+    *a = va;
+    *b = vb;
+}
+    
 void swap_plus_noinline(uint8_t cond, __m128* a, __m128* b);
 void swap_eq_noinline(uint8_t cond, __m128* a, __m128* b);
     

@@ -79,7 +79,7 @@ TEST(Swap, plus_noinline)
     EXPECT_TRUE(_mm_testc_si128(b0, a2));
 }
 
-TEST(Swap, eq_inline)
+TEST(Swap, eq_only_input)
 {
     __m128i a0 = _mm_set1_epi8(1);
     __m128i b0 = _mm_set1_epi8(2);
@@ -87,15 +87,16 @@ TEST(Swap, eq_inline)
     __m128i a1 = a0, a2 = a0;
     __m128i b1 = b0, b2 = b0;
 
-    swap_eq_inline(0, (__m128*)&a1, (__m128*)&b1);
+    swap_eq_only_input(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1));
     EXPECT_TRUE(_mm_testc_si128(b0, b1));
 
-    swap_eq_inline(1, (__m128*)&a2, (__m128*)&b2);
+    swap_eq_only_input(1, (__m128*)&a2, (__m128*)&b2);
     EXPECT_TRUE(_mm_testc_si128(a0, b2));
     EXPECT_TRUE(_mm_testc_si128(b0, a2));
 }
-TEST(Swap, plus_inline)
+
+TEST(Swap, plus_only_input)
 {
     __m128i a0 = _mm_set1_epi8(1);
     __m128i b0 = _mm_set1_epi8(2);
@@ -103,11 +104,62 @@ TEST(Swap, plus_inline)
     __m128i a1 = a0, a2 = a0;
     __m128i b1 = b0, b2 = b0;
 
-    swap_plus_inline(0, (__m128*)&a1, (__m128*)&b1);
+    swap_plus_only_input(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1));
     EXPECT_TRUE(_mm_testc_si128(b0, b1));
 
-    swap_plus_inline(1, (__m128*)&a2, (__m128*)&b2);
+    swap_plus_only_input(1, (__m128*)&a2, (__m128*)&b2);
+    EXPECT_TRUE(_mm_testc_si128(a0, b2));
+    EXPECT_TRUE(_mm_testc_si128(b0, a2));
+}
+
+TEST(Swap, eq_all_output)
+{
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
+
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
+
+    swap_eq_all_output(0, (__m128*)&a1, (__m128*)&b1);
+    EXPECT_TRUE(_mm_testc_si128(a0, a1));
+    EXPECT_TRUE(_mm_testc_si128(b0, b1));
+
+    swap_eq_all_output(1, (__m128*)&a2, (__m128*)&b2);
+    EXPECT_TRUE(_mm_testc_si128(a0, b2));
+    EXPECT_TRUE(_mm_testc_si128(b0, a2));
+}
+
+TEST(Swap, eq_mixed_1)
+{
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
+
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
+
+    swap_eq_mixed_1(0, (__m128*)&a1, (__m128*)&b1);
+    EXPECT_TRUE(_mm_testc_si128(a0, a1));
+    EXPECT_TRUE(_mm_testc_si128(b0, b1));
+
+    swap_eq_mixed_1(1, (__m128*)&a2, (__m128*)&b2);
+    EXPECT_TRUE(_mm_testc_si128(a0, b2));
+    EXPECT_TRUE(_mm_testc_si128(b0, a2));
+}
+
+TEST(Swap, eq_mixed_2)
+{
+    __m128i a0 = _mm_set1_epi8(1);
+    __m128i b0 = _mm_set1_epi8(2);
+
+    __m128i a1 = a0, a2 = a0;
+    __m128i b1 = b0, b2 = b0;
+
+    swap_eq_mixed_2(0, (__m128*)&a1, (__m128*)&b1);
+    EXPECT_TRUE(_mm_testc_si128(a0, a1));
+    EXPECT_TRUE(_mm_testc_si128(b0, b1));
+
+    swap_eq_mixed_2(1, (__m128*)&a2, (__m128*)&b2);
     EXPECT_TRUE(_mm_testc_si128(a0, b2));
     EXPECT_TRUE(_mm_testc_si128(b0, a2));
 }

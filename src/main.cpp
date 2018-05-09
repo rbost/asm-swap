@@ -60,7 +60,7 @@ TEST(Swap, eq_noinline)
     EXPECT_TRUE(_mm_testc_si128(a0, b2)&_mm_testc_si128(b0, a2));
 }
 
-TEST(Swap, plus_noinline)
+TEST(Swap, plus_only_input_noinline)
 {
     __m128i a0 = _mm_set1_epi8(1);
     __m128i b0 = _mm_set1_epi8(2);
@@ -68,10 +68,10 @@ TEST(Swap, plus_noinline)
     __m128i a1 = a0, a2 = a0;
     __m128i b1 = b0, b2 = b0;
 
-    swap_plus_noinline(0, (__m128*)&a1, (__m128*)&b1);
+    swap_plus_only_input_noinline(0, (__m128*)&a1, (__m128*)&b1);
     EXPECT_TRUE(_mm_testc_si128(a0, a1) & _mm_testc_si128(b0, b1));
 
-    swap_plus_noinline(1, (__m128*)&a2, (__m128*)&b2);
+    swap_plus_only_input_noinline(1, (__m128*)&a2, (__m128*)&b2);
     EXPECT_TRUE(_mm_testc_si128(a0, b2)&_mm_testc_si128(b0, a2));
 }
 

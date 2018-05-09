@@ -56,7 +56,7 @@ inline void swap_64_ko(uint8_t cond, uint64_t* a, uint64_t* b)
     *b = vb;
 }
     
-void swap_plus_noinline(uint8_t cond, __m128* a, __m128* b);
+void swap_plus_only_input_noinline(uint8_t cond, __m128* a, __m128* b);
 void swap_eq_noinline(uint8_t cond, __m128* a, __m128* b);
     
 __attribute__((always_inline))
@@ -79,7 +79,6 @@ inline void swap_plus_only_input(uint8_t cond, __m128* a, __m128* b)
 
 
     __m128i mask = _mm_set1_epi32(w_mask);
-    __m128i acc;
     asm volatile("vpxor %0, %1, %2\n\t"
                  "vpand %2, %5, %2\n\t"
                  "vpxor %0, %2, %0\n\t"
@@ -113,7 +112,6 @@ inline void swap_eq_only_input(uint8_t cond, __m128* a, __m128* b)
 
 
     __m128i mask = _mm_set1_epi32(w_mask);
-    __m128i acc;
     asm volatile("vpxor %0, %1, %2\n\t"
                  "vpand %2, %5, %2\n\t"
                  "vpxor %0, %2, %0\n\t"
@@ -148,7 +146,6 @@ inline void swap_eq_all_output(uint8_t cond, __m128* a, __m128* b)
 
 
     __m128i mask = _mm_set1_epi32(w_mask);
-    __m128i acc;
     asm volatile("vpxor %0, %1, %2\n\t"
                  "vpand %2, %3, %2\n\t"
                  "vpxor %0, %2, %0\n\t"
@@ -182,7 +179,6 @@ inline void swap_eq_mixed_1(uint8_t cond, __m128* a, __m128* b)
 
 
     __m128i mask = _mm_set1_epi32(w_mask);
-    __m128i acc;
     asm volatile("vpxor %0, %1, %2\n\t"
                  "vpand %2, %3, %2\n\t"
                  "vpxor %0, %2, %0\n\t"
@@ -216,7 +212,6 @@ inline void swap_eq_mixed_2(uint8_t cond, __m128* a, __m128* b)
 
 
     __m128i mask = _mm_set1_epi32(w_mask);
-    __m128i acc;
     asm volatile("vpxor %4, %5, %2\n\t"
                  "vpand %2, %6, %2\n\t"
                  "vpxor %0, %2, %4\n\t"
